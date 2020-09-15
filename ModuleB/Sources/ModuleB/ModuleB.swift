@@ -6,10 +6,10 @@ import ControllerCenter
  参数
     - parameter didPushModuleCBlock:(() -> Void) 点击前往ModuleC的回掉
  */
-public class ModuleB: UIViewController, Module {
-    public static func make(_ parameter: [String : Any]) -> Module {
+public class ModuleB: UIViewController, ModifyModule {
+    public static func make(_ modify: Modify) -> ModifyModule? {
         let moduleB = ModuleB()
-        moduleB.didPushModuleCBlock = parameter["didPushModuleCBlock"] as? (() -> Void)
+        moduleB.didPushModuleCBlock = modify.get(globaleOptionalParameter: "didPushModuleCBlock")
         return moduleB
     }
     
@@ -31,7 +31,7 @@ public class ModuleB: UIViewController, Module {
     @objc func pushModuleC() {
         didPushModuleCBlock?()
         let modify = ControllerCenter.make("ModuleC")
-                                     .parameter("name", value: "君赏")
+            .parameter(key: "name", block: {$0.parameter(value: "君赏")})
         modify.present(in: self, animated: true, completion: nil)
     }
     

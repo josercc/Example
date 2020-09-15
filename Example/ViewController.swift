@@ -17,14 +17,14 @@ class ViewController: UIViewController {
     }
 
     @IBAction func pushModuleB() {
-        let modify = ControllerCenter.make("ModuleB").parameter("didPushModuleCBlock", value: {
+        let modify = ControllerCenter.make("ModuleB").parameter(key: "didPushModuleCBlock", block: {$0.parameter(value: {
             print("didPushModuleCBlock")
-        })
+        })})
         modify.push(in: self.navigationController, animated: true)
     }
     
     @IBAction func presentModuleA() {
-        ControllerCenter.make("ModuleA").parameter("backgroundColor", value: UIColor.red).present(in: self, animated: true, completion: nil)
+        ControllerCenter.make("ModuleA").parameter(key: "backgroundColor", block: {$0.parameter(value: UIColor.red)}).present(in: self, animated: true, completion: nil)
     }
 
 }

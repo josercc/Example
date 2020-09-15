@@ -6,10 +6,12 @@ import ControllerCenter
  参数
     - parameter backgroundColor:背景颜色
  */
-public class ModuleA: UIViewController, Module {
-    public static func make(_ parameter: [String : Any]) -> Module {
+public class ModuleA: UIViewController, ModifyModule {
+    public static func make(_ modify: Modify) -> ModifyModule? {
         let moduleA = ModuleA()
-        moduleA.backgroundColor = parameter["backgroundColor"] as? UIColor
+        if let backgroundColor:UIColor = modify.get(globaleOptionalParameter: "backgroundColor") {
+            moduleA.backgroundColor = backgroundColor
+        }
         return moduleA
     }
     

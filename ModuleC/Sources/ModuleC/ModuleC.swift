@@ -1,9 +1,9 @@
 import UIKit
 import ControllerCenter
 
-public class ModuleC: UIViewController,Module {
-    public static func make(_ parameter: [String : Any]) -> Module {
-        let moduleC = ModuleC(name: parameter["name"] as? String)
+public class ModuleC: UIViewController, ModifyModule {
+    public static func make(_ modify: Modify) -> ModifyModule? {
+        let moduleC = ModuleC(name: modify.get(globaleOptionalParameter: "name"))
         return moduleC
     }
     
